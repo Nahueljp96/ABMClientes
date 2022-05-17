@@ -1,0 +1,1 @@
+{"0":{"dni":"4040404","nombre":"Marcelo","telefono":"213123212313","correo":"marcelo@marcelo.com","imagen":"2022051708055020.png"},"2":{"dni":"4034203420","nombre":"Nahuel","telefono":"0113232323","correo":"lalolanda@hola","imagen":"2022051708055421.png"},"3":{"dni":"12312321321","nombre":"Cleotilde","telefono":"12321321","correo":"asdad@asd","imagen":"2022051708052322.png"}}
