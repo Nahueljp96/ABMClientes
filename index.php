@@ -36,7 +36,7 @@ if($_POST){
     
     if(array_key_exists("archivo", $_FILES)){ //array_key pregunta si "archivo" fue subido
         if($_FILES["archivo"]["error"]===UPLOAD_ERR_OK){ //esta linea valida si el archivo fue subido correctamente
-            $nombreAleatorio = date("Ymdhmsi");
+            $nombreAleatorio = date("Ymdhmsi");         //genera el nombre aleatorio
             $archivo_tmp=$_FILES["archivo"]["tmp_name"]; //nombre del archivo en memoria
             $nombre_archivo=$_FILES["archivo"]["name"]; //nombre original del archivo
             $extension = pathinfo($_FILES["archivo"]["name"],PATHINFO_EXTENSION); //obtiene la extensión del nombre
