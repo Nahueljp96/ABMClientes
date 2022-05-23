@@ -156,7 +156,7 @@ if($_POST){
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary m-1">Guardar</button>
-                        <button type="summit" class="btn btn-danger m-1">Nuevo</button> <!-- corregir-->
+                        <a href="index.php" class="btn btn-danger m-1">Nuevo</a>
                     </div> 
                 </form>
             </div>
