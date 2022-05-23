@@ -46,12 +46,47 @@ if($_POST){
                 $nombreImagen="$nombreAleatorio.$extension"; //asigna el nuevo nombre de la imagen para mostrarlo
         }
     }
-    $aClientes[] =array("dni"=>$dni,
-                        "nombre"=>$nombre,
-                        "telefono"=>$telefono,
-                        "correo"=>$correo,
-                        "imagen"=>$nombreImagen
-);
+    //otra forma de hacerlo:
+   /* if(array_key_exists("archivo", $_FILES)){ 
+        if($_FILES["archivo"]["error"]===UPLOAD_ERR_OK){ 
+            $nombreAleatorio = date("Ymdhmsi");         
+            $archivo_tmp=$_FILES["archivo"]["tmp_name"]; 
+            $nombre_archivo=$_FILES["archivo"]["name"]; 
+            $extension = pathinfo($_FILES["archivo"]["name"],PATHINFO_EXTENSION); 
+            if($extension =="jpg" || $extension =="png" || $extension =="jpeg") 
+                $nombreImagen="$nombreAleatorio.$extension"; 
+                move_uploaded_file($archivo_tmp, "imagenes/$nombre.$extension"); 
+                
+        }
+    }*/
+    if ($id>=0){
+        // Si no se subio una imagen y estoy editando conservar en $nombreImagen el nombre
+        // de la imagen anterior que esta asociada al cliente que estamos editando
+        if ($_FILES["archivo"]["error"] !== UPLOAD_ERR_OK){ 
+            $nombreImagen = $aClientes[$id]["imagen"];
+        } else{
+            //Si viene una imagen Y hay una imagen anterior, eliminar la anterior
+            if(file_exists("imagenes/". $aClientes[$id]["imagen"])){
+                unlink("imagenes/". $aClientes[$id]["imagen"]);
+            }
+        }
+            
+        //Estoy editando
+        $aClientes[$id]=array("dni"=> $dni,
+                "nombre"=>$nombre,
+                "telefono"=>$telefono,
+                "correo"=> $correo,
+                "imagen"=> $nombreImagen,
+            );
+    }   else{
+            //Estoy insertando un nuevo cliente
+            $aClientes[] =array("dni"=> $dni,
+                "nombre"=> $nombre,
+                "telefono"=> $telefono,
+                "correo"=> $correo,
+                "imagen"=> $nombreImagen);        
+    }
+    
     //convertir el arrray de clientes json
     $strJson = json_encode($aClientes);
 
@@ -121,7 +156,7 @@ if($_POST){
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary m-1">Guardar</button>
-                        <button type="summit" class="btn btn-danger m-1">Nuevo</button>
+                        <button type="summit" class="btn btn-danger m-1">Nuevo</button> <!-- corregir-->
                     </div> 
                 </form>
             </div>
